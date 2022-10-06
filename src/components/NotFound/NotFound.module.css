@@ -1,0 +1,9 @@
+.title {
+	text-align: center;
+	padding: 8px;
+	margin-top: 0;
+	border-radius: 8px;
+	font-size: 46px;
+	font-weight: 700;
+	text-shadow: 0 0 10px aqua;
+}
