@@ -10,7 +10,7 @@ export default function HomePage({ closemodal }) {
   const [moviesList, setMoviesList] = useState([]);
   const [countPage, setCountPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -36,12 +36,15 @@ export default function HomePage({ closemodal }) {
   }, [showModal, closemodal]);
 
   return (
-    <div>
-      <MoviesGallery moviesList={moviesList} onOpen={setShowModal} />
+    <div className="box">
+      <div>
+        <MoviesGallery moviesList={moviesList} onOpen={setShowModal} />
+      </div>
       {loading && <Loader />}
       {showModal && (
         <ModalPageEdite id={showModal} onClose={() => setShowModal(false)} />
       )}
+
       <Pagination
         className="pagination"
         total={totalPage}
