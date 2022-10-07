@@ -135,7 +135,7 @@
 	font-weight: 500;
 	font-size: 20px;
 	line-height: 30px;
-	color: var(--color);
+	color: #ff868e;
 	background-image: url(../../images/modal/upload-bg.png);
 	background-color: var(--bg);
 	background-repeat: no-repeat;
@@ -212,7 +212,7 @@
 	display: flex;
 	align-items: center;
 	padding: 18px 20px;
-	width: 100%;
+	width: auto;
 	height: 60px;
 	font-size: 16px;
 	line-height: 24px;
@@ -221,13 +221,15 @@
 	border-radius: 10px;
 }
 .modal-page__success--icon {
-	width: 20px;
+	display: block;
+	min-width: 20px;
 	height: 20px;
 	margin-right: 10px;
 	background: url(../../images/modal/success-20.png) no-repeat center;
 }
 .modal-page__error--icon {
-	width: 20px;
+	display: block;
+	min-width: 20px;
 	height: 20px;
 	margin-right: 10px;
 	background: url(../../images/modal/error-20.png) no-repeat center;

@@ -40,9 +40,12 @@ export default function ModalPage({ onClose }) {
       await addHero(formData);
       setSuccessFile(true);
       reset();
+      onClose();
     } catch (error) {
-      setErrorFile(true);
-      console.log(error);
+      setErrorFile(error);
+      setTimeout(() => {
+        setErrorFile(false);
+      }, 3000);
     }
     setUploading(false);
   };
@@ -195,7 +198,7 @@ export default function ModalPage({ onClose }) {
           {errorFile && (
             <div className="modal-page__success">
               <span className="modal-page__error--icon"></span>
-              No Dog found - try a different one
+              Error: {errorFile.response.data.message}
             </div>
           )}
         </div>

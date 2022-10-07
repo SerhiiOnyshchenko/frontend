@@ -31,7 +31,7 @@ export const addHero = async formData => {
     const response = await axios.post(``, formData, header);
     return response.data;
   } catch (error) {
-    console.log(error);
+    throw error;
   }
 };
 

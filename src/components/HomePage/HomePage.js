@@ -1,13 +1,12 @@
 import { getHeros } from '../../services/hero-api';
 import { useState, useEffect } from 'react';
 import Loader from '../../components/Loader/Loader';
-import Scrollup from '../../components/Scrollup/Scrollup';
 import MoviesGallery from '../../components/MoviesGallery/MoviesGallery';
-import s from './HomePage.module.css';
+import './HomePage.css';
 import ModalPageEdite from '../ModalPageEdite/ModalPageEdite';
 import Pagination from 'rc-pagination';
 
-export default function HomePage() {
+export default function HomePage({ closemodal }) {
   const [moviesList, setMoviesList] = useState([]);
   const [countPage, setCountPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
@@ -23,7 +22,18 @@ export default function HomePage() {
         setLoading(false);
       })
       .catch(setLoading(false));
-  }, [countPage, showModal]);
+  }, [countPage]);
+
+  useEffect(() => {
+    setLoading(true);
+    getHeros(1)
+      .then(date => {
+        setTotalPage(date.total);
+        setMoviesList(date.heros);
+        setLoading(false);
+      })
+      .catch(setLoading(false));
+  }, [showModal, closemodal]);
 
   return (
     <div>
@@ -33,15 +43,14 @@ export default function HomePage() {
         <ModalPageEdite id={showModal} onClose={() => setShowModal(false)} />
       )}
       <Pagination
-        className={s.pagination}
+        className="pagination"
         total={totalPage}
         pageSize={5}
         current={countPage}
-        onChange={setCountPage}
+        onChange={page => setCountPage(page)}
         prevIcon={'Prev'}
         nextIcon={'Next'}
       />
-      <Scrollup />
     </div>
   );
 }

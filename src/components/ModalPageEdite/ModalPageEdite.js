@@ -11,14 +11,14 @@ export default function ModalPageEdite({ id, onClose }) {
   const [errorFile, setErrorFile] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [isEdite, setIsEdite] = useState(true);
+  const [fileInput, setFileInput] = useState(null);
 
   const [nickname, setNickname] = useState('');
   const [realName, setRealName] = useState('');
   const [originDescription, setOriginDescription] = useState('');
   const [superpowers, setSuperpowers] = useState('');
   const [catchPhrase, setCatchPhrase] = useState('');
-  const [fileInput, setFileInput] = useState(null);
-
+  const [image, setImage] = useState('');
   useEffect(() => {
     setSuccessFile(false);
     setErrorFile(false);
@@ -50,7 +50,7 @@ export default function ModalPageEdite({ id, onClose }) {
       setOriginDescription(originDescription);
       setSuperpowers(superpowers);
       setCatchPhrase(catchPhrase);
-      setFileInput(image);
+      setImage(image);
     } catch (error) {
       console.log(error);
     }
@@ -92,8 +92,8 @@ export default function ModalPageEdite({ id, onClose }) {
   }
   const deleteCard = async id => {
     try {
-			await deleteHeros(id);
-			onClose()
+      await deleteHeros(id);
+      onClose();
     } catch (error) {
       console.log(error);
     }
@@ -138,16 +138,11 @@ export default function ModalPageEdite({ id, onClose }) {
               <img
                 className="modal-page__file-img-large"
                 id="modalFileImg"
-                src={fileInput}
+                src={image}
                 alt={nickname}
+                width="320"
+                height="480"
               />
-              <input
-                className="modal-page__input"
-                type="file"
-                name="image"
-                accept=".jpg,.png"
-                onChange={changeInput}
-              ></input>
             </div>
             <div className="modal-page__btn-box">
               <button
@@ -155,7 +150,6 @@ export default function ModalPageEdite({ id, onClose }) {
                 type="button"
                 onClick={() => {
                   setIsEdite(false);
-                  setFileInput(null);
                 }}
               >
                 Edite
@@ -242,6 +236,7 @@ export default function ModalPageEdite({ id, onClose }) {
                     ? 'modal-page__drag modal-page__drag--error'
                     : 'modal-page__drag'
                 }
+                style={{ backgroundImage: `url(${image})` }}
               >
                 <p>
                   Drag here<span>your file or</span>
@@ -257,7 +252,7 @@ export default function ModalPageEdite({ id, onClose }) {
                   src={URL.createObjectURL(fileInput)}
                   alt={fileInput.name}
                 />
-              )}{' '}
+              )}
               <input
                 className="modal-page__input"
                 type="file"
@@ -283,20 +278,22 @@ export default function ModalPageEdite({ id, onClose }) {
                   uploading
                 </button>
               ) : (
-                <input
-                  className="modal-page__btn-upload"
-                  type="submit"
-                  onClick={hendleUpload}
-                  value="upload"
-                />
+                ''
               ))}
+            {!uploading && (
+              <input
+                className="modal-page__btn-upload"
+                type="submit"
+                onClick={hendleUpload}
+                value="upload"
+              />
+            )}
             {successFile && (
               <div className="modal-page__success">
                 <span className="modal-page__success--icon"></span>
                 Thanks for the Upload!
               </div>
             )}
-
             {errorFile && (
               <div className="modal-page__success">
                 <span className="modal-page__error--icon"></span>

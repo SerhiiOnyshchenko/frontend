@@ -40,6 +40,6 @@
 .pagination li:focus {
 	background-color: rgb(0, 146, 146);
 }
-.pagination li.rc-pagination-item-active {
+.pagination .rc-pagination-item-active {
 	background-color: rgb(0, 146, 146);
 }

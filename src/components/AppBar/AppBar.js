@@ -1,19 +1,32 @@
-import s from './Appbar.module.css';
+import './Appbar.css';
 import Button from './../Button/Button';
-import Searchbar from '../Searchbar/Searchbar';
 import { useState } from 'react';
 import ModalPage from './../ModalPage/ModalPage';
+import PropTypes from 'prop-types';
 
-export default function Appbar() {
+export default function Appbar({ setClosemodal }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <header className={s.header}>
-      <Searchbar onSubmit={() => {}} />
-      <div className={s.btn}>
-        <Button onClick={() => setShowModal(true)} title="Create new hero" />
-      </div>
-      {showModal && <ModalPage onClose={() => setShowModal(false)} />}
+    <header className="header">
+      <Button
+        onClick={() => {
+          setShowModal(true);
+          setClosemodal('');
+        }}
+        title="Create new hero"
+      />
+      {showModal && (
+        <ModalPage
+          onClose={() => {
+            setShowModal(false);
+            setClosemodal('Create new hero');
+          }}
+        />
+      )}
     </header>
   );
 }
+Appbar.propTypes = {
+  setClosemodal: PropTypes.func.isRequired,
+};
