@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/frontend/static/css/main.be15d333.css",
-    "main.js": "/frontend/static/js/main.8421c1da.js",
+    "main.css": "/frontend/static/css/main.00e6d01e.css",
+    "main.js": "/frontend/static/js/main.c1203295.js",
     "static/media/bd-heros.jpg": "/frontend/static/media/bd-heros.d76c9a699dcb45b5cf40.jpg",
     "index.html": "/frontend/index.html",
-    "main.be15d333.css.map": "/frontend/static/css/main.be15d333.css.map",
-    "main.8421c1da.js.map": "/frontend/static/js/main.8421c1da.js.map"
+    "main.00e6d01e.css.map": "/frontend/static/css/main.00e6d01e.css.map",
+    "main.c1203295.js.map": "/frontend/static/js/main.c1203295.js.map"
   },
   "entrypoints": [
-    "static/css/main.be15d333.css",
-    "static/js/main.8421c1da.js"
+    "static/css/main.00e6d01e.css",
+    "static/js/main.c1203295.js"
   ]
 }
