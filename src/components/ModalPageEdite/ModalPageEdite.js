@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import './ModalPageEdite.css';
 import { deleteHeros, updateHero, getHeroById } from '../../services/hero-api';
+import PropTypes from 'prop-types';
 
 export default function ModalPageEdite({ id, onClose }) {
   const modalRoot = useRef(document.querySelector('#modal-root'));
@@ -307,3 +308,8 @@ export default function ModalPageEdite({ id, onClose }) {
     modalRoot.current
   );
 }
+
+ModalPageEdite.propTypes = {
+  id: PropTypes.string.isRequired,
+  onClose: PropTypes.func.isRequired,
+};

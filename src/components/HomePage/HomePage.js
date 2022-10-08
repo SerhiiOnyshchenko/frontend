@@ -5,8 +5,9 @@ import MoviesGallery from '../../components/MoviesGallery/MoviesGallery';
 import './HomePage.css';
 import ModalPageEdite from '../ModalPageEdite/ModalPageEdite';
 import Pagination from 'rc-pagination';
+import Appbar from './../AppBar/AppBar';
 
-export default function HomePage({ closemodal }) {
+export default function HomePage() {
   const [moviesList, setMoviesList] = useState([]);
   const [countPage, setCountPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
@@ -15,45 +16,48 @@ export default function HomePage({ closemodal }) {
 
   useEffect(() => {
     setLoading(true);
-    getHeros(countPage)
-      .then(date => {
-        setTotalPage(date.total);
-        setMoviesList(date.heros);
-        setLoading(false);
-      })
-      .catch(setLoading(false));
+    featchHeros(countPage);
   }, [countPage]);
 
-  useEffect(() => {
-    setLoading(true);
-    getHeros(1)
-      .then(date => {
-        setTotalPage(date.total);
-        setMoviesList(date.heros);
-        setLoading(false);
-      })
-      .catch(setLoading(false));
-  }, [showModal, closemodal]);
+  const featchHeros = async page => {
+    try {
+      const date = await getHeros(page);
+      setTotalPage(date.total);
+      setMoviesList(date.heros);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+    }
+  };
 
   return (
-    <div className="box">
-      <div>
-        <MoviesGallery moviesList={moviesList} onOpen={setShowModal} />
-      </div>
-      {loading && <Loader />}
-      {showModal && (
-        <ModalPageEdite id={showModal} onClose={() => setShowModal(false)} />
-      )}
+    <>
+      <Appbar featchList={setCountPage} />
+      <div className="box">
+        <div>
+          <MoviesGallery moviesList={moviesList} onOpen={setShowModal} />
+        </div>
+        {loading && <Loader />}
+        {showModal && (
+          <ModalPageEdite
+            id={showModal}
+            onClose={() => {
+              setShowModal(false);
+              setCountPage(1);
+            }}
+          />
+        )}
 
-      <Pagination
-        className="pagination"
-        total={totalPage}
-        pageSize={5}
-        current={countPage}
-        onChange={page => setCountPage(page)}
-        prevIcon={'Prev'}
-        nextIcon={'Next'}
-      />
-    </div>
+        <Pagination
+          className="pagination"
+          total={totalPage}
+          pageSize={5}
+          current={countPage}
+          onChange={page => setCountPage(page)}
+          prevIcon={'Prev'}
+          nextIcon={'Next'}
+        />
+      </div>
+    </>
   );
 }

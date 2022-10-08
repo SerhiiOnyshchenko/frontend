@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import './ModalPage.css';
 import { addHero } from './../../services/hero-api';
+import PropTypes from 'prop-types';
 
 export default function ModalPage({ onClose }) {
   const modalRoot = useRef(document.querySelector('#modal-root'));
@@ -207,3 +208,7 @@ export default function ModalPage({ onClose }) {
     modalRoot.current
   );
 }
+
+ModalPage.propTypes = {
+  onClose: PropTypes.func.isRequired,
+};

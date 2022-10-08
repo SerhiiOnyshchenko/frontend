@@ -4,23 +4,17 @@ import { useState } from 'react';
 import ModalPage from './../ModalPage/ModalPage';
 import PropTypes from 'prop-types';
 
-export default function Appbar({ setClosemodal }) {
+export default function Appbar({ featchList }) {
   const [showModal, setShowModal] = useState(false);
 
   return (
     <header className="header">
-      <Button
-        onClick={() => {
-          setShowModal(true);
-          setClosemodal('');
-        }}
-        title="Create new hero"
-      />
+      <Button onClick={() => setShowModal(true)} title="Create new hero" />
       {showModal && (
         <ModalPage
           onClose={() => {
             setShowModal(false);
-            setClosemodal('Create new hero');
+            featchList(1);
           }}
         />
       )}
@@ -28,5 +22,5 @@ export default function Appbar({ setClosemodal }) {
   );
 }
 Appbar.propTypes = {
-  setClosemodal: PropTypes.func.isRequired,
+  featchList: PropTypes.func.isRequired,
 };

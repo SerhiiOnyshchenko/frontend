@@ -21,9 +21,9 @@ MoviesGallery.propTypes = {
   moviesList: PropTypes.arrayOf(
     PropTypes.shape({
       _id: PropTypes.string.isRequired,
-      title: PropTypes.string,
-      name: PropTypes.string,
-      poster_path: PropTypes.string,
+      nickname: PropTypes.string,
+      image: PropTypes.string,
     })
   ),
+  onOpen: PropTypes.func.isRequired,
 };
